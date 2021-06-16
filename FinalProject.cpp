@@ -18,19 +18,17 @@ private:
     int grass = 1, rabbit = 0, wolf = 0;
     vector <vector<int> > row;
 
-    void startMessage(int numberMessage) {
-        if (numberMessage == 1) {//Стартовове
+    void startMessage() {
+
             cout << "Gama \"Life\"" << endl;
 
             cout << "# - Трава" << endl;
             cout << "& - Заец" << endl;
             cout << "@ - Волк" << endl;
-        }
-        else if (numberMessage == 2) {
+        
             cout << "Введи количество итераций: ";
             cin >> iteration;
-            cout << endl;
-        }
+            cout << endl;        
     }
 
     void creationGameField() { // Почему вектор из интов, только потому-что так удобней вплане проверок итд. А в выводе протсто вместо числа знак.
@@ -195,8 +193,7 @@ private:
 
 public:
     void startGame() {
-        startMessage(1);
-        startMessage(2);
+        startMessage();
         creationGameField();
         print();
 
