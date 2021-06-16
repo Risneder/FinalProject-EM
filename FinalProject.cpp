@@ -14,9 +14,8 @@ class Engine
 {
 private:
     int size = 52;
-    int iteration = 15;
+    int iteration = 5;
     int grass = 1, rabbit = 0, wolf = 0;
-    string a = " ";
     vector <vector<int> > row;
 
     void startMessage(int numberMessage) {
@@ -56,7 +55,6 @@ private:
                 row[i][size - 1] = 4;
             }
         }
-
         grass += 3;
     }
    
@@ -91,16 +89,6 @@ private:
         }
     }
 
-public:
-    void startGame() {
-        startMessage(1);
-        startMessage(2);
-        creationGameField();
-        print();
-
-        system("cls");
-        gameLogic();
-    }
     void gameLogic() {
 
         for (int i = 0; i < iteration; i++) {
@@ -204,6 +192,17 @@ public:
             print();
         }
     }
+
+public:
+    void startGame() {
+        startMessage(1);
+        startMessage(2);
+        creationGameField();
+        print();
+
+        system("cls");
+        gameLogic();
+    }
 };
 
 int main()
@@ -213,5 +212,4 @@ int main()
     
     Engine game;
     game.startGame();
-
 }
