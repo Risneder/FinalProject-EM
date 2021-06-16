@@ -129,7 +129,7 @@ public:
 
             if (grass < 0) { //проверка , чтоб в случае отрицательного кол-ва объектов их удалять
                 //очистка
-                for (int j = 0; j < abs(grass); j++) {
+                for (int j = 1; j < abs(grass); j++) {
                     int a = random(1, 51);
                     int b = random(1, 51);
                     if (row[a][b] == 1) {
@@ -141,7 +141,7 @@ public:
                 }
             }
             else if (rabbit < 0) {
-                for (int j = 0; j < abs(rabbit); j++) {
+                for (int j = 1; j < abs(rabbit); j++) {
                     int a = random(1, 51);
                     int b = random(1, 51);
                     if (row[a][b] == 2) {
@@ -153,7 +153,7 @@ public:
                 }
             }
             else if (wolf < 0) {
-                for (int j = 0; j < abs(wolf); j++) {
+                for (int j = 1; j < abs(wolf); j++) {
                     int a = random(1, 51);
                     int b = random(1, 51);
                     if (row[a][b] == 3) {
