@@ -92,32 +92,37 @@ private:
     }
 
 public:
-    void gameLogic() {
+    void startGame() {
         startMessage(1);
         startMessage(2);
         creationGameField();
         print();
 
         system("cls");
+        gameLogic();
+    }
+    void gameLogic() {
 
         for (int i = 0; i < iteration; i++) {
             grass += 3 + grass / 2; //вычисление травы
 
             if (grass >= 5) { // если травы больще 5 , спавн зайца по формуле
-                rabbit = grass / 5;
+                rabbit += grass / 5;
             }
 
-            if (grass < rabbit) { // если зайцев больше чем травы , то от зайцев отнимаем ращницу 
+            grass -= rabbit; // зайец съедает траву
+
+            if (grass < rabbit) { // если зайцев больше чем травы , то от зайцев отнимаем разницу 
                 int a;
                 a = rabbit - grass;
                 rabbit -= a;
             }
 
-            grass -= rabbit; // зайец съедает траву
-
             if (rabbit >= 5) {//зайцев больше 5, спавн волка
-                wolf = rabbit / 5;
+                wolf += rabbit / 5;
             }
+
+            rabbit -= wolf; // волк съедает зайца
 
             if (rabbit < wolf) { //если волков больше зайцев , то от волков отнимаем разницу
                 int a;
@@ -125,11 +130,9 @@ public:
                 wolf -= a;
             }
 
-            rabbit -= wolf; // волк съедает зайца
-
-            if (grass < 0) { //проверка , чтоб в случае отрицательного кол-ва объектов их удалять
+            if (grass < 0) { //проверка , чтоб в случае отрицательного кол-ва объектов их удалять с массива
                 //очистка
-                for (int j = 1; j < abs(grass); j++) {
+                for (int j = 0; j < abs(grass); j++) {
                     int a = random(1, 51);
                     int b = random(1, 51);
                     if (row[a][b] == 1) {
@@ -141,7 +144,7 @@ public:
                 }
             }
             else if (rabbit < 0) {
-                for (int j = 1; j < abs(rabbit); j++) {
+                for (int j = 0; j < abs(rabbit); j++) {
                     int a = random(1, 51);
                     int b = random(1, 51);
                     if (row[a][b] == 2) {
@@ -153,7 +156,7 @@ public:
                 }
             }
             else if (wolf < 0) {
-                for (int j = 1; j < abs(wolf); j++) {
+                for (int j = 0; j < abs(wolf); j++) {
                     int a = random(1, 51);
                     int b = random(1, 51);
                     if (row[a][b] == 3) {
@@ -197,12 +200,9 @@ public:
                     j--;
                 }
             }
-
-            print();
             system("cls");
-
+            print();
         }
-        print();
     }
 };
 
@@ -212,6 +212,6 @@ int main()
     srand(time(0));
     
     Engine game;
-    game.gameLogic();
+    game.startGame();
 
 }
