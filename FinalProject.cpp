@@ -10,6 +10,7 @@ int errors() {
     cout << "************************************" << endl;
     cout << "*              Errors              *" << endl;
     cout << "************************************" << endl;
+
     return 0;
 }
 
@@ -20,7 +21,7 @@ int random(int min, int max) {
 class Engine
 {
 private:
-    int size = 52;
+    int size = 12;
     int iteration = 5;
     int grass = 1, rabbit = 0, wolf = 0;
     vector <vector<int> > row;
@@ -35,7 +36,15 @@ private:
         
             cout << "Введи количество итераций: ";
             cin >> iteration;
+
             if (iteration <= 0) {
+                errors();
+            }
+
+            cout << "Введи размер игрового поля: ";
+            cin >> size;
+
+            if (size <= 5) {
                 errors();
             }
             cout << endl;        
@@ -64,6 +73,16 @@ private:
             }
         }
         grass += 3;
+        for (int j = 0; j < grass; j++) {
+            int a = random(1, size-1);
+            int b = random(1, size - 1);
+            if (row[a][b] == 0) {
+                row[a][b] = 1;
+            }
+            else {
+                j--;
+            }
+        }
     }
    
     void print() {
@@ -136,8 +155,8 @@ private:
             if (grass < 0) { //проверка , чтоб в случае отрицательного кол-ва объектов их удалять с массива
                 //очистка
                 for (int j = 0; j < abs(grass); j++) {
-                    int a = random(1, 51);
-                    int b = random(1, 51);
+                    int a = random(1, size-1);
+                    int b = random(1, size - 1);
                     if (row[a][b] == 1) {
                         row[a][b] = 0;
                     }
@@ -148,8 +167,8 @@ private:
             }
             else if (rabbit < 0) {
                 for (int j = 0; j < abs(rabbit); j++) {
-                    int a = random(1, 51);
-                    int b = random(1, 51);
+                    int a = random(1, size - 1);
+                    int b = random(1, size - 1);
                     if (row[a][b] == 2) {
                         row[a][b] = 0;
                     }
@@ -160,8 +179,8 @@ private:
             }
             else if (wolf < 0) {
                 for (int j = 0; j < abs(wolf); j++) {
-                    int a = random(1, 51);
-                    int b = random(1, 51);
+                    int a = random(1, size - 1);
+                    int b = random(1, size - 1);
                     if (row[a][b] == 3) {
                         row[a][b] = 0;
                     }
@@ -172,8 +191,8 @@ private:
             }
 
             for (int j = 0; j < grass; j++) {
-                int a = random(1, 51);
-                int b = random(1, 51);
+                int a = random(1, size - 1);
+                int b = random(1, size - 1);
                 if (row[a][b] == 0) {
                     row[a][b] = 1;
                 }
@@ -183,8 +202,8 @@ private:
             }
 
             for (int j = 0; j < rabbit; j++) {
-                int a = random(1, 51);
-                int b = random(1, 51);
+                int a = random(1, size - 1);
+                int b = random(1, size - 1);
                 if (row[a][b] == 0) {
                     row[a][b] = 2;
                 }
@@ -194,8 +213,8 @@ private:
             }
 
             for (int j = 0; j < wolf; j++) {
-                int a = random(1, 51);
-                int b = random(1, 51);
+                int a = random(1, size - 1);
+                int b = random(1, size - 1);
                 if (row[a][b] == 0) {
                     row[a][b] = 3;
                 }
@@ -221,4 +240,6 @@ int main()
     
     Engine game;
     game.startGame();
+
+    return 0;
 }
