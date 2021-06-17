@@ -21,8 +21,8 @@ int random(int min, int max) {
 class Engine
 {
 private:
-    int size = 12;
-    int iteration = 5;
+    int size = 52;
+    int iteration = 15;
     int grass = 1, rabbit = 0, wolf = 0;
     vector <vector<int> > row;
 
