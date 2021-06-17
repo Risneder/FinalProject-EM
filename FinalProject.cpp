@@ -6,6 +6,13 @@
 
 using namespace std;
 
+int errors() {
+    cout << "************************************" << endl;
+    cout << "*              Errors              *" << endl;
+    cout << "************************************" << endl;
+    return 0;
+}
+
 int random(int min, int max) {
     return min + rand() % (max - min + 1);
 }
@@ -28,6 +35,9 @@ private:
         
             cout << "Введи количество итераций: ";
             cin >> iteration;
+            if (iteration <= 0) {
+                errors();
+            }
             cout << endl;        
     }
 
@@ -81,6 +91,9 @@ private:
                 else if (row[i][j] == 4) {
                     cout << "*";
                 }
+                else {
+                    errors();
+                }
                 cout << " ";
             }
             cout << endl;
@@ -90,6 +103,10 @@ private:
     void gameLogic() {
 
         for (int i = 0; i < iteration; i++) {
+
+            system("cls");
+            print();
+
             grass += 3 + grass / 2; //вычисление травы
 
             if (grass >= 5) { // если травы больще 5 , спавн зайца по формуле
@@ -186,8 +203,6 @@ private:
                     j--;
                 }
             }
-            system("cls");
-            print();
         }
     }
 
@@ -195,9 +210,6 @@ public:
     void startGame() {
         startMessage();
         creationGameField();
-        print();
-
-        system("cls");
         gameLogic();
     }
 };
